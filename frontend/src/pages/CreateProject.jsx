@@ -11,7 +11,8 @@ export default function CreateProject() {
   const navigate = useNavigate()
   const [form, setForm] = useState({
     title: '', description: '', techStack: [],
-    rolesNeeded: [], commitmentLevel: 'MEDIUM'
+    rolesNeeded: [], commitmentLevel: 'MEDIUM',
+    githubRepo: ''
   })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -110,7 +111,7 @@ export default function CreateProject() {
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Commitment Level</label>
           <select
-            className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={form.commitmentLevel}
             onChange={(e) => setForm({ ...form, commitmentLevel: e.target.value })}
           >
@@ -118,6 +119,16 @@ export default function CreateProject() {
             <option value="MEDIUM">Medium — part time</option>
             <option value="HIGH">High — near full time</option>
           </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">GitHub Repository (Optional)</label>
+          <input
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="e.g. facebook/react"
+            value={form.githubRepo}
+            onChange={(e) => setForm({ ...form, githubRepo: e.target.value })}
+          />
         </div>
 
         <button

@@ -1,6 +1,5 @@
 package com.robintech.backend.service;
 
-import com.robintech.backend.dto.ChatMessage;
 import com.robintech.backend.dto.MessageResponse;
 import com.robintech.backend.model.Message;
 import com.robintech.backend.model.User;
@@ -10,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 

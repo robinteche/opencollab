@@ -58,6 +58,9 @@ public class Project {
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
+    @Column(name = "github_repo")
+    private String githubRepo;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

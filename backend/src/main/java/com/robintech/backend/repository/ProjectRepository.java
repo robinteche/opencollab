@@ -16,8 +16,8 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     @Query("SELECT DISTINCT p FROM Project p " +
             "LEFT JOIN FETCH p.owner " +
-            "LEFT JOIN FETCH p.rolesNeeded " +   // ✅ ADD THIS
-            "LEFT JOIN FETCH p.techStack " +     // ✅ ADD THIS (same issue possible)
+            "LEFT JOIN FETCH p.rolesNeeded " +
+            "LEFT JOIN FETCH p.techStack " +
             "WHERE (:tech IS NULL OR :tech MEMBER OF p.techStack) AND " +
             "(:role IS NULL OR :role MEMBER OF p.rolesNeeded) AND " +
             "(:commitment IS NULL OR p.commitmentLevel = :commitment) AND " +

@@ -57,28 +57,3 @@ public class ProjectController {
 }
 
 
-//POST http://localhost:8080/api/projects
-//Authorization: Bearer <your_token>
-//Content-Type: application/json
-//
-//{
-//    "title": "OpenCollab itself",
-//        "description": "Building a platform for developers to find project teammates",
-//        "techStack": ["React", "Spring Boot", "MySQL"],
-//    "rolesNeeded": ["Frontend Dev", "UI Designer"],
-//    "commitmentLevel": "MEDIUM"
-//}
-//```
-//
-//        **Get all open projects (with optional filters):**
-//        ```
-//        GET http://localhost:8080/api/projects
-//        GET http://localhost:8080/api/projects?tech=React
-//        GET http://localhost:8080/api/projects?commitment=MEDIUM
-//        Authorization: Bearer <your_token>
-//        ```
-//
-//        **Get my projects:**
-//        ```
-//        GET http://localhost:8080/api/projects/my
-//        Authorization: Bearer <your_token>

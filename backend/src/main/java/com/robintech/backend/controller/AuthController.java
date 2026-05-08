@@ -1,6 +1,8 @@
 package com.robintech.backend.controller;
 
+
 import com.robintech.backend.dto.AuthResponse;
+import com.robintech.backend.dto.GithubLoginRequest;
 import com.robintech.backend.dto.LoginRequest;
 import com.robintech.backend.dto.RegisterRequest;
 import com.robintech.backend.service.AuthService;
@@ -25,33 +27,9 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
     }
+
+    @PostMapping("/github")
+    public ResponseEntity<AuthResponse> githubLogin(@Valid @RequestBody GithubLoginRequest request) {
+        return ResponseEntity.ok(authService.loginWithGithub(request.getCode()));
+    }
 }
-//```
-//
-//        ---
-//
-//        ## Test it!
-//
-//Run the backend from IntelliJ (click the green play button), then test with these requests in Postman or any HTTP client:
-//
-//        **Register:**
-//        ```
-//POST http://localhost:8080/api/auth/register
-//Content-Type: application/json
-//
-//{
-//    "username": "john_dev",
-//        "email": "john@example.com",
-//        "password": "password123"
-//}
-//```
-//
-//        **Login:**
-//        ```
-//POST http://localhost:8080/api/auth/login
-//Content-Type: application/json
-//
-//{
-//    "email": "john@example.com",
-//        "password": "password123"
-//}
