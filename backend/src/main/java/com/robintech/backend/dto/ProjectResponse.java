@@ -27,6 +27,7 @@ public class ProjectResponse {
     private String ownerUsername;
     private Set<UserResponse> collaborators;
     private LocalDateTime createdAt;
+    private String githubRepo;
 
     public static ProjectResponse fromEntity(Project project) {
         return ProjectResponse.builder()
@@ -44,6 +45,7 @@ public class ProjectResponse {
                                 .map(UserResponse::fromEntity)
                                 .collect(Collectors.toSet()))
                 .createdAt(project.getCreatedAt())
+                .githubRepo(project.getGithubRepo())
                 .build();
     }
 }

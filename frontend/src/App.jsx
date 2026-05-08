@@ -10,6 +10,7 @@ import ProjectDetail from './pages/ProjectDetail'
 import Profile from './pages/Profile'
 import Dashboard from './pages/Dashboard'
 import Chat from './pages/Chat'
+import GithubCallback from './pages/GithubCallback'
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
             <Route path="/" element={<Navigate to="/feed" />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/auth/github/callback" element={<GithubCallback />} />
             <Route path="/feed" element={
               <ProtectedRoute><Feed /></ProtectedRoute>
             } />

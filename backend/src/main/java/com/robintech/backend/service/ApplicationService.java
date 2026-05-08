@@ -43,9 +43,16 @@ public class ApplicationService {
         if (project.getOwner().getId().equals(applicant.getId()))
             throw new RuntimeException("You cannot apply to your own project");
 
-        if (applicationRepository.existsByProjectAndApplicant(project, applicant))
-            throw new RuntimeException("You have already applied to this project");
-
+        java.util.Optional<Application> existingOpt = applicationRepository.findByProjectAndApplicant(project, applicant);
+        if (existingOpt.isPresent()) {
+            Application existing = existingOpt.get();
+            if (existing.getStatus() == ApplicationStatus.REJECTED) {
+                applicationRepository.delete(existing);
+                applicationRepository.flush();
+            } else {
+                throw new RuntimeException("You have already applied to this project");
+            }
+        }
         if (project.getStatus() != Project.ProjectStatus.OPEN)
             throw new RuntimeException("This project is not accepting applications");
 
@@ -58,7 +65,6 @@ public class ApplicationService {
 
         Application saved = applicationRepository.save(application);
 
-        // Notify project owner
         notificationService.createNotification(
                 project.getOwner(),
                 applicant.getUsername() + " applied to your project: " + project.getTitle(),
@@ -68,7 +74,7 @@ public class ApplicationService {
         return ApplicationResponse.fromEntity(saved);
     }
 
-    // Project owner sees all applications for their project
+
     public List<ApplicationResponse> getApplicationsForProject(Long projectId) {
         User currentUser = getCurrentUser();
         Project project = projectRepository.findById(projectId)
@@ -91,7 +97,7 @@ public class ApplicationService {
                 .collect(Collectors.toList());
     }
 
-    // Applicant sees all their own applications
+
     public List<ApplicationResponse> getMyApplications() {
         User currentUser = getCurrentUser();
         return applicationRepository.findByApplicant(currentUser)
@@ -100,7 +106,6 @@ public class ApplicationService {
                 .collect(Collectors.toList());
     }
 
-    // Owner accepts or rejects an application
     public ApplicationResponse updateApplicationStatus(Long applicationId,
                                                        ApplicationStatus status) {
         User currentUser = getCurrentUser();

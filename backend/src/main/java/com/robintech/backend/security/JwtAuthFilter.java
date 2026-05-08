@@ -40,7 +40,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                                     userDetails, null, userDetails.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 } catch (UsernameNotFoundException e) {
-                    // Stale token for non-existent user - ignore and continue
                 }
             }
         }

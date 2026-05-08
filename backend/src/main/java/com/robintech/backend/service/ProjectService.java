@@ -36,6 +36,7 @@ public class ProjectService {
                 .techStack(request.getTechStack())
                 .rolesNeeded(request.getRolesNeeded())
                 .commitmentLevel(request.getCommitmentLevel())
+                .githubRepo(request.getGithubRepo())
                 .owner(owner)
                 .build();
         return ProjectResponse.fromEntity(projectRepository.save(project));
@@ -49,11 +50,7 @@ public class ProjectService {
                 .collect(Collectors.toList());
     }
 
-//    public ProjectResponse getProjectById(Long id) {
-//        Project project = projectRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Project not found"));
-//        return ProjectResponse.fromEntity(project);
-//    }
+
 public ProjectResponse getProjectById(Long id) {
     Project project = projectRepository.findByIdWithDetails(id);
     if (project == null) {
@@ -75,6 +72,7 @@ public ProjectResponse getProjectById(Long id) {
         project.setTechStack(request.getTechStack());
         project.setRolesNeeded(request.getRolesNeeded());
         project.setCommitmentLevel(request.getCommitmentLevel());
+        project.setGithubRepo(request.getGithubRepo());
         return ProjectResponse.fromEntity(projectRepository.save(project));
     }
 

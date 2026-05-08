@@ -12,6 +12,7 @@ API.interceptors.request.use((config) => {
 // Auth
 export const register = (data) => API.post('/auth/register', data)
 export const login = (data) => API.post('/auth/login', data)
+export const githubLogin = (data) => API.post('/auth/github', data)
 
 // Projects
 export const getAllProjects = (params) => API.get('/projects', { params })

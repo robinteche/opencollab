@@ -26,4 +26,6 @@ public class ProjectRequest {
 
     @NotNull
     private CommitmentLevel commitmentLevel;
+
+    private String githubRepo;
 }
